@@ -84,21 +84,18 @@ public class Customer {
     }
 
     public void login() {
-        
         this.online=true;
+        System.out.println(this.getFullName()+" is now login!\n");
+
     }
 
     public void logout() {
+
         this.online=false;
+        System.out.println(this.getFullName()+" is now logout!\n");
     }
 
-    public void changePassword(){
-        Scanner s=new Scanner(System.in);
-        System.out.println("Please enter a new password");
-        String newPassword=s.nextLine();
-        this.password=newPassword;
-        System.out.println("Password changed");
-    }
+
 
     public void changeAddress(){
         Scanner s=new Scanner(System.in);

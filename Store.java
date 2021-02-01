@@ -66,12 +66,71 @@ public class Store {
         this.storeCustomers.add(customer);
     }
 
+    public void showCustomers(){
+        for(Customer customer:this.storeCustomers){
+            System.out.println("--"+customer.getFullName()+"--\n");
+        }
+    }
+
     public void deleteCustomer(String name){
         for(Customer customer:this.storeCustomers){
             if(customer.getFullName()==name){
                 this.storeCustomers.remove(customer);
             }
         }
+    }
+
+    public boolean customerLogin(String username){
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName()==username){
+                customer.login();
+                System.out.println("Logged in!\n");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void customerLogout(String username){
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName()==username){
+                customer.logout();
+            }
+        }
+    }
+    public void changePassword(String username){
+        Scanner s=new Scanner(System.in);
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName()==username){
+                System.out.println("Enter your current password please:\n");
+                String currentPassword=s.nextLine();
+                if(currentPassword==customer.password){
+                    System.out.println("Enter your new password:\n");
+                    String newPassword=s.nextLine();
+                    customer.setPassword(newPassword);
+                }
+            }
+        }
+    }
+
+    public String returnAddress(String name){
+        String addressGet=null;
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName()==name){
+                addressGet= customer.getAddress();
+            }
+        }
+        return addressGet;
+    }
+
+    public String returnPhone(String name){
+        String phoneGet=null;
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName()==name){
+                phoneGet= customer.getAddress();
+            }
+        }
+        return phoneGet;
     }
 
 
