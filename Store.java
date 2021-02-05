@@ -82,9 +82,16 @@ public class Store {
 
     public boolean customerLogin(String username){
         for(Customer customer:this.storeCustomers){
-            if(customer.getFullName()==username){
+            if(customer.getFullName().equals(username)){
                 customer.login();
                 System.out.println("Logged in!\n");
+                for(Cart cart:this.cartsInStore){
+                    if(cart.customerName.equals("empty")){
+                        cart.setCustomerName(username);
+                        System.out.println(customer.getFullName()+" Took cart number "+ cart.cartId);
+                        break;
+                    }
+                }
                 return true;
             }
         }
@@ -133,6 +140,13 @@ public class Store {
         return phoneGet;
     }
 
+    public void createCart(){
+        for(int i=0;i<100;i++){
+           Cart cart=new Cart(1000+i,"empty");
+           this.cartsInStore.add(cart);
+
+        }
+    }
 
 
 }

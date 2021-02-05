@@ -6,15 +6,20 @@ public class Cart {
     protected int cartId;
     protected Product[] products=new Product[100];
     protected int productsCount;
-    protected Customer customerName;
+    protected String customerName;
+
+
+
+
+
 
     protected int productsIndex=0;
 
-    public Cart(int cartId, Product[] products, int productsCount, Customer customerName) {
+    public Cart(int cartId, String customer) {
         this.cartId = cartId;
-        this.products = products;
-        this.productsCount = productsCount;
-        this.customerName = customerName;
+
+        this.customerName=customer;
+
     }
 
     public int getCartId() {
@@ -41,11 +46,11 @@ public class Cart {
         this.productsCount = productsCount;
     }
 
-    public Customer getCustomerName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(Customer customerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 

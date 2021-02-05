@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Program {
     public static void main(String[] args){
         Store store = new Store("Makolet");
+        store.createCart();
         //Customer newCustomer=new Customer();
         Scanner scanner=new Scanner(System.in);
         int userInput, subUserInput;
