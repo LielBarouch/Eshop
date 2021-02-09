@@ -93,19 +93,14 @@ public class Store {
 
     //מחיקת לקוחות
     public void deleteCustomer(String name){
-        for(Customer customer:this.storeCustomers){
-            if(customer.getFullName().equals(name)){
-                this.storeCustomers.remove(customer);
-            }
-        }
+        this.storeCustomers.removeIf(customer -> customer.getFullName().equals(name));
     }
 
     //התחברות לקוח ולקיחת עגלה
-    public boolean customerLogin(String username){
+    public boolean customerLogin(String username,String password){
         for(Customer customer:this.storeCustomers){
-            if(customer.getFullName().equals(username)){
+            if(customer.getFullName().equals(username) && customer.getPassword().equals(password)){
                 customer.login();
-                System.out.println("Logged in!\n");
                 for(Cart cart:this.cartsInStore){
                     if(cart.customerName.equals("empty")){
                         cart.setCustomerName(username);
@@ -114,21 +109,33 @@ public class Store {
                     }
                 }
                 return true;
+            }else{
+                System.out.println("Username or password are wrong\n");
             }
         }
         return false;
     }
 
-    //התנתקות לקוח
-    public void customerLogout(String username){
+    //יציאת לקוח ושיחרור עגלה
+    public boolean customerLogout(String username){
         for(Customer customer:this.storeCustomers){
-            if(customer.getFullName()==username){
+            if(customer.getFullName().equals(username)){
                 customer.logout();
+                for(Cart cart:this.cartsInStore){
+                    if(cart.customerName.equals(username)){
+                        cart.setCustomerName("empty");
+                        System.out.println(customer.getFullName()+" released cart number "+ cart.cartId);
+                        break;
+                    }
+                }
+                return true;
             }
         }
+        return false;
     }
     //שינוי סיסמא ללקוח
     public void changePassword(String username){
+
         Scanner s=new Scanner(System.in);
         for(Customer customer:this.storeCustomers){
             if(customer.getFullName().equals(username)){
@@ -142,21 +149,52 @@ public class Store {
             }
         }
     }
+    //החלפת כתובת
+    public boolean changeAddress(String name){
+        Scanner s=new Scanner(System.in);
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName().equals(name)){
+                System.out.println("Your current address is "+customer.getAddress());
+                System.out.println("\nEnter a new address\n");
+                String newAddress = s.nextLine();
+                customer.setAddress(newAddress);
+                return true;
+            }
+        }
+        return false;
+    }
 
+    //החלפת מספר טלפון
+    public boolean changePhone(String name){
+        Scanner s=new Scanner(System.in);
+        for(Customer customer:this.storeCustomers){
+            if(customer.getFullName().equals(name)){
+                System.out.println("Your current phone number is "+customer.getPhone());
+                System.out.println("\nEnter a new phone number\n");
+                String newPhone = s.nextLine();
+                customer.setAddress(newPhone);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //החזרת כתובת
     public String returnAddress(String name){
         String addressGet=null;
         for(Customer customer:this.storeCustomers){
-            if(customer.getFullName()==name){
+            if(customer.getFullName().equals(name)){
                 addressGet= customer.getAddress();
             }
         }
         return addressGet;
     }
 
+    //החזרת מספר טלפון
     public String returnPhone(String name){
         String phoneGet=null;
         for(Customer customer:this.storeCustomers){
-            if(customer.getFullName()==name){
+            if(customer.getFullName().equals(name)){
                 phoneGet= customer.getAddress();
             }
         }
