@@ -1,9 +1,12 @@
 package Eshop;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Program {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+
         Store store = new Store("Makolet");
         store.createCart();
         //Customer newCustomer=new Customer();
@@ -105,7 +108,8 @@ public class Program {
                             break;
                         case 12:
                             System.out.println("Enter the customer name you want to delete:\n");
-                            String name = scanner.nextLine();
+                            Scanner deleteScanner = new Scanner(System.in);
+                            String name = deleteScanner.nextLine();
                             store.deleteCustomer(name);
                             break;
                         case 20:
